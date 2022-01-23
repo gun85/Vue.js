@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>`
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!--1. 개발환경설치 끝-->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+<body>
+      <div id="app">
+         <h2>배열반복1</h2>     
+         <ul>
+            <li v-for="m in arr">{{m}}</li>
+         </ul>
+         <h2>배열반복2</h2>     
+         <ul>
+            <li v-for="(m,idx) in arr">{{idx}}:{{m}}</li>
+         </ul>
+         <h2>배열반복3</h2>     
+         <ul>
+            <li v-for="(m,idx) in arr" v-if="idx%2==0">{{idx}}:{{m}}</li>
+         </ul>
+            <hr>
+         <h2>객체반복1</h2>     
+         <ul>
+            <li v-for="(value, key) in obj">{{key}}:{{value}}</li>
+         </ul>
+         <h2>객체반복2</h2>     
+         <ul>
+            <li v-for="(value, key, idx) in obj">{{idx}},{{key}}:{{value}}</li>
+         </ul>
+         <hr>
+         <h2>그룹핑 반복</h2>
+         <template  v-for="(m,idx) in arr">
+            <div>{{idx}}:{{m}}</div>
+            <span>Hello</span>
+         </template>
+       </div>
+    <script>
+   
+        let model = {
+           arr:["A","B","C"],
+           obj:{
+               key1:"V1",
+               key2:"V2",
+               key3:"V3",
+           }
+        };
+
+        var app = new Vue({
+        el: '#app',
+        data: model 
+        });
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>`
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!--1. 개발환경설치 끝-->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+<body>
+
+    <div id="app">
+      <h1>1. preventDefalt</h1>
+      <form action="http://www.daum.net" @submit.prevent="login">
+          id:<input type="text" placeholder="4글자이상" v-model="id"/>
+          <input type="submit" />
+      </form>
+      <h1>2. stopPropagation(이벤트전파방지)</h1>
+      <div style="background-color: yellow;" @click="parent">
+           parent
+          <div style="background-color: green;" @click.stop="child">
+            child
+          </div>
+      </div>
+      <h1>3. keyup.enter 효과</h1>
+      <input type="text" @keyup.enter="keynum"/>
+      <h1>4. once 효과</h1>
+      <button @click.once="one">onec</button>
+    </div>
+    <script>
+ 
+        let model = {
+            id: ''
+        };
+        var app = new Vue({
+            el: '#app',
+            data: model,
+            methods:{
+                one(){
+                    console.log("one");
+                },
+                keynum(e){
+                    //엔터쳤을 때 로직 실행
+                    // if(e.keyCode == 13){
+                        console.log("keynum", e.keyCode);
+                    // }
+                },
+                parent(e){
+                    console.log("parent");
+                },
+                child(e){
+                    console.log("child");
+                    // e.stopPropagation();
+                },
+                login(e){
+                    console.log("login");
+                    if(this.id.length >= 4){
+                        e.target.submit();
+                    }else{
+                        alert("4 글자 이상입니다.")
+                        // e.preventDefault();
+                    }
+                },
+            } 
+        });
+
+
+    </script>
+</body>
+</html>

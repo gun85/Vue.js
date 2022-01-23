@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        class Person{
+            constructor(name,age){
+                this.name = name;
+                this.age = age;
+            }
+            setName(name){
+                this.name = name;
+            }
+            set setAge(age){
+                this.age = age;
+            }
+            getName(){
+                return this.name;
+            }
+            get getAge(){
+                return this.age;
+            }
+        }//end class
+
+         var p = new  Person("홍길동",20);
+         p.setName("이순신");
+         p.setAge = 20;
+         console.log(p.getName())
+         console.log(p.getAge);
+
+
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>`
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!--1. 개발환경설치 끝-->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        .red-accent{
+            color:red;
+        }
+    </style>
+</head>
+<body>
+  
+    <div id="app">
+        <ul v-bind:id="mid">
+            <li :class="mclass">A</li>
+            <li :style="mstyle">A2</li>
+            <li><a :href="link.mhref">daum</a></li>
+        </ul>
+    </div>
+    <script>
+        
+        let model = {
+            mid:"list",
+            mclass:'red-accent',
+            mstyle:"color:blue",
+            link:{
+                mhref:"http://www.daum.net"
+            }
+        };
+        var app = new Vue({
+        el: '#app',
+        data: model 
+        });
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!--1. 개발환경설치 끝-->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+<body>
+    <div id="app">
+        message:{{ message }}<br>
+        내년age:{{ age + 1 }}<br>
+        40대냐?:{{ age > 40 }}<br>
+        weight:{{ Number.parseInt(weight) + 1 }}<br>
+        height:{{ height }}<br>
+        phones:{{ phones }}&nbsp;{{phones[0]}}<br>
+
+        문자열함수_대문자:{{user.email.toUpperCase()}}<br>
+        문자열함수_소문자:{{user.email.toLowerCase()}}<br>
+        문자열함수_부분열:{{user.email.substring(0,3)}}<br>
+
+        배열함수_join:{{phones.join("  * ")}}<br>
+        3 항연산자:{{isMarried?"기혼":"미혼"}}<br>
+    </div>
+    <script>
+
+        let model = {
+            message: '안녕하세요 Vue!',
+            age:30,
+            weight:"67",
+            height:178.53,
+            isMarried:true,
+            phones:[100,200,300],
+            user:{
+                username:"홍길동",
+                address:"서울",
+                email:"Abce@Daum.NET"
+            }
+        };
+
+        var app = new Vue({
+        el: '#app',
+        data: model 
+        });
+
+     
+
+    </script>
+</body>
+</html>

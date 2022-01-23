@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>`
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!--1. 개발환경설치 끝-->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        .set1{
+            color:red;
+        }
+        .set2{
+            background-color: yellow;
+        }
+        .set3{
+            font-size: 50px;
+        }
+    </style>
+</head>
+<body>
+  
+    <div id="app">
+       <div :class="{set1:s1, set2:s2, set3:s3}">
+        Hello
+       </div>
+       <div :[mclass]="{set1:s1, set2:s2, set3:s3}">
+        Hello2
+    </div>
+    </div>
+    <script>
+        
+        let model = {
+                s1:true,
+                s2:false,
+                s3:true,
+                mclass:"class"
+            };
+      
+        var app = new Vue({
+        el: '#app',
+        data: model 
+        });
+
+
+    </script>
+</body>
+</html>

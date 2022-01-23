@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>`
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!--1. 개발환경설치 끝-->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+<body>
+ 
+    <div id="app">
+       <list-component></list-component>
+       <hr>
+       <list2-component></list2-component>
+    </div>
+    <template id="list-template">
+        <div>
+            <button @click="plus">+</button>
+            {{num}}
+        </div>
+    </template>
+    <script>
+        //공유데이터
+        //var current = {num:0};
+        Vue.component("list-component",{
+            template:'#list-template',
+            data:function(){
+                return {num:0};
+            },
+            methods:{
+                plus(){
+                    this.num = this.num + 1;
+                }
+            }
+        });
+        Vue.component("list2-component",{
+            template:'#list-template',
+            data:function(){
+                return {num:0};
+            },
+            methods:{
+                plus(){
+                    this.num = this.num + 1;
+                }
+            }
+        });
+    
+        var app = new Vue({
+        el: '#app'
+        });
+
+
+    </script>
+</body>
+</html>

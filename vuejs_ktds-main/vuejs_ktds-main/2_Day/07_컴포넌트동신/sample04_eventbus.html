@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>`
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!--1. 개발환경설치 끝-->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+<body>
+
+    <div id="app">
+        <c1-component></c1-component>
+        <c2-component></c2-component>
+    </div>
+    <template id="c1-template">
+       <div>
+           <input type="text" @change="trans" />
+       </div>
+    </template>
+    <template id="c2-template">
+        <div>
+            값출력:
+        </div>
+    </template>
+    <script>
+        //이벤트 벼스 객체생성 ==> 모든 컴포넌트에서 사용하기 위해서 전역으로 생성.
+        let eventBus = new Vue();
+        // 값변경
+        Vue.component('c1-component',{
+            template:"#c1-template",
+            methods:{
+                trans(e){
+                    eventBus.$emit('xyz', e.target.value); // 'xyz'은 사용자 이벤트명
+                }
+            }
+        });
+        // 보여주기
+        Vue.component('c2-component',{
+            template:"#c2-template",
+            // created hook메서드에서  사용자 이벤트 설정
+            created(){
+                console.log("created");
+                eventBus.$on('xyz', this.receive); // 생성된 사용자이벤트로 receive 함수 호출
+            },
+            methods:{
+                receive(n){
+                    console.log("receive", n);
+                }
+            }
+        });
+        //부모 컴포넌트
+        var app = new Vue({
+        el: '#app'
+        });
+
+
+    </script>
+</body>
+</html>

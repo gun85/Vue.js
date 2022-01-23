@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vuejs 디렉티브</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+      이름:{{username|toUpper}}
+    </div>
+    <div id="app2">
+        이름:{{username|toUpper|toSlice(1,4)}}
+    </div>
+    <script>
+        //전역 필터 객체
+        var fun = function(param){
+            return param.toUpperCase();
+        };
+        var fun = (param)=>param.toUpperCase();
+
+        Vue.filter("toUpper", param=>param.toUpperCase() );
+        //toSlice  전역으로 생성하기
+        Vue.filter("toSlice",((param,start,end)=>param.substring(start,end)));
+
+        var app = new Vue({
+            el: '#app',
+            data: {
+              username:"hongKilDONG"
+            }
+        });
+        var app2 = new Vue({
+            el: '#app2',
+            data: {
+              username:"ParkKilDong"
+            }
+        });
+    </script>
+</body>
+
+</html>
