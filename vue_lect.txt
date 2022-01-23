@@ -1,0 +1,451 @@
+# 강의 사이트
+https://github.com/inky4832
+
+https://nodejs.org/
+
+cmd에서 node -v
+* cdn : 링크로 vue 라이브러리 사용 * cli는 설치필요
+
+
+# 프로그램 툴
+https://code.visualstudio.com/
+
+# visual studio에서 extention 추가
+1) Vetur
+2) Vue 2 Snippets
+3) Live Server
+
+
+https://chrome.google.com/webstore/search/vuejs?hl=ko
+
+# var와 let의 차이
+1. 중복여부
+2. 블록 scope 의 범위
+3. 호이스팅 (자바스크립트가 선언된 변수를 실행될때 맨 위로 끌어올린다)
+
+
+# ES6 다른점
+        var email = "abc.com";
+        var my = "address";
+        var user = {
+
+            name:"홍길동",
+            age : 20,
+            
+            //email:email,
+            email, // 2. email:email 와 같이 변수명이 동일하면 한번만 써도된다.
+            
+            //address : "서울",
+            [my] : "서울", // 3. address : "서울"의 키값을 치환할 수 있다.
+            
+            getName : function(){
+                return this.name;
+            },
+            getAge(){ // 1. 함수는 function을 빼고 이 형태를 많이 쓴다.
+                return this.age;
+            }
+        };
+
+# 배열객체분해할당
+        var [x,y] = [10,20];
+        console.log(x,y);
+
+        var [x,y,z] = [100,200];
+        console.log(x,y,z);
+        
+        var [x,y,z=3000] = [1000,2000];
+        console.log(x,y,z);
+        
+        var [,,z] = [10000,20000,99999];
+        console.log(z);
+        
+        var [x,y,z,[k1,k2,k3]] = [1,2,3,[5,6,7]];
+        console.log(x,y,z,k1,k2,k3);
+
+# 객체분해할당
+        var {n,n2} = {n:100,n2:300};
+        console.log(n,n2);
+
+# 파라미터 객체분해할당
+        function func([a,b]){
+            console.log(a,b);
+        }
+        func([1,2]);
+
+        function func2({x,y}){
+            console.log(x,y);
+        }
+        func2({x:10,y:20});
+
+# back-tick (tamplet 리터럴)
+var name = "홍길동";
+        // 개행과 달라치환할때 쓴다.
+        var s = `
+        
+            <table>
+                <tr>
+                    <td>A , ${name} </td>
+                </tr>
+            </table>
+        
+        `;
+
+
+# 자바스크립트는 함수를 '데이터'로 본다. *일급객체
+그래서 함수를 호출할 때 
+1. 파라미터로 함수(데이터)를 넣을 수 있다.
+2. 리턴값으로 함수(데이터)를 받을 수 있다.
+3. 변수에 함수명을 넣을 수 있다.
+
+* 일급객체의 특징
+1. 콜백 함수 
+
+
+1. 인터프리터가 분석단계에서
+1) 함수명의 변수를 선언한다.
+2) function '객체'를 생성한다. * 내부적으로 new function 된다
+3) fun = 함수객체
+
+그래서 console.log 에 그냥 함수 변수를 넣으면 
+ƒ fun1(){
+            console.log("fun1");
+        }
+함수 객체가 나온다.
+
+
+console.log(fun1()); // 가능
+
+        // 함수 선언식 --> 인터프리터가 선언단계에서 객체를 생성해둔다.
+        function fun1(){
+            console.log("fun1");
+        }
+        console.log(fun1);
+
+        // 함수 표현식
+        /*
+        function(){
+            console.log("");
+        }
+        */
+        
+        //console.log(fun2()); // 불가
+        
+        var fun2 = function(){
+            console.log("func2");
+        }
+
+        console.log(fun2());
+
+# 일급객체
+        function fun(){
+            console.log("fun");
+        }
+        fun();
+
+        // 1. 변수저장
+        var x = fun;
+        x();
+
+        // 2. 함수로출시 함수를 인자값으로 사용 가능
+        function fun2(x){
+            x();
+        }
+        fun2(fun);
+
+        // 3. 함수를 함수의 리턴값으로 사용 가능
+        function fun3(){
+            return fun;
+        }
+        var x = fun3();
+        x();
+
+        // var fun3 = 100; // 처리불가
+
+
+# 함수들
+// 1. 기본
+        function fun(n,n2,n3){
+            console.log(n,n2,n3);
+        }
+        fun();
+        fun(1);
+        fun(1,2,3,4,5,6);
+
+        // 2. undefined 방지 ==> default 파라미터
+        function fun2(n=999,n2=999,n3=999){
+            console.log(n,n2,n3);
+        }
+        fun2();
+        fun2(1);
+        fun2(1,2,3,4,5,6);
+
+        // 3. 누락된 파라미터 방지 ==> rest 파라미터
+        function fun3(n,n2,...n3){
+            console.log(n,n2,n3);
+        }
+        fun3(1,2,3,4,5,6);
+
+        // * 참조, 객체분해할당에서도 rest 사용가능
+        let [a,b,...rest] = [1,2,3,4,5,6,7,8,9];
+        console.log(a,b,rest)
+
+        // 4. callback 함수 ==> 개발자가 직접 호출하지 않고 시스템이 호출하는 함수(보통은 이벤트핸들러가 담당함)
+        function say(x){
+            x();
+        }
+        function callback(){
+            console.log("###callback###");
+        }
+        say(callback);
+
+# arrow 함수 (1개짜리, 2개짜리) ==> 함수표현식(익명함수)을 좀 더 간단하게 표현하는 방식
+-> 자바
+=> 자바스크립트
+// 1. 리턴값 없고 파라미터 없음
+        var fun = function (){
+            console.log("fun");
+        }
+
+        fun();
+
+        // 기능에 집중하기위해 function을 땐다.
+        var fun2 = () => { console.log("fun2"); };
+        fun2();
+
+        // 한줄이면 중괄호도 땐다.
+        var fun3 = () => console.log("fun3");
+        fun3();
+
+        
+        // 2.리턴값 없고 파라미터는 있음
+        var fun4 = function (n,n2){
+            console.log(n,n2);
+        }
+        fun4(1,2);
+
+        var fun5 = (n,n2) => console.log(n,n2);
+        fun5(10,20);
+
+        // 파라미터가 1개면 뺄 수 있다.
+        var fun6 = function (n){
+            console.log(n);
+        }
+        fun6(100);
+
+        var fun7 = n => console.log(n);
+        fun6(1000);
+
+        // 4. 리턴도 있고 파라미터도 있음
+        var fun8 = function (n,n2){
+            return n + n2;
+        }
+        console.log(fun8(1,2));
+
+        var fun9 = (n,n2) => n+2 ;
+        console.log(fun9(1,2));
+
+
+# class
+자바스크립트는 get / set 을 앞에 붙이면 함수가 아니라 변수처럼 호출한다.
+* 쉽게말해 () 함수를 안붙인다.! set get 붙으면
+
+        class Person{
+
+            constructor(name,age){
+                this.name = name;
+                this.age = age;
+            }
+
+
+            setName(name){
+                this.name = name;
+            }
+            set setAge(age){
+                this.age = age;
+            }
+
+            getName(){
+                return this.name;
+            }
+
+            get getAge(){
+                return this.age;
+            }
+
+        }
+
+        var p = new Person("홍길동",30);
+        p.setName("이순신");
+        p.setAge = 50;
+
+        console.log(p.getName());
+        console.log(p.getAge);
+
+
+# static 지원한다.
+
+# 상속
+
+        class Person{
+            constructor(name,age){
+                this.name = name;
+                this.age = age;
+            }
+        }
+
+        class Man extends Person{
+            constructor(name,age,address){
+                //this.name = name; --오류
+                //this.age = age; --오류
+                super(name,age); // 자바스크립트에서는 자식이 직접 this 로 부모참조불가
+                this.address = address;
+            }
+        }
+
+        var m = new Man("홍길동",20,"서울");
+
+
+
+# 모듈
+--> 단순한 자바스크립트 파일인데, 이걸 분리해서 사용할 수 있는 개념이다.
+물리적으로 분리되어있는 .js 간에 자원을 export로 노출을 시켜서 import해서 쓰는개념
+1) export (여러개를 자원을 노출가능)
+2) export default (하나의 자원만 노출)
+
+
+
+
+
+# 사이트
+https://kr.vuejs.org/v2/guide/
+
+# 뷰의 개념 MVVM
+단방향 : JSON >> Java Script >> HTML
+양방향 : HTML >> Java Script >> JSON
+
+1. View : HTML과 CSS로 이루어진 요소
+    <div id="app">
+        {{ message }}
+    </div>
+
+2. Model : JSON형태의 데이터 요소
+        let model = {
+            message : '안녕하세요 vue!'
+
+        };
+
+3. View Model : View 와 Model을 연결한다.
+
+
+
+# 뷰의 데이터 종류
+    <!-- M'V'VM - View-->
+    <div id="app">
+        message : {{ message }} <br>
+        age : {{ age }} <br>
+        height : {{ height }} <br>
+        phone : {{ phone }} &nbsp; {{ phone[0] }} <br>
+        user : {{ user }} &nbsp; {{ user.username }} <br>
+        
+        
+    </div>
+
+      <script>
+        // 'M'VVM - Model
+        let model = {
+            message : '안녕하세요 vue!',
+            age:30,
+            height:175.34,
+            isMarred : true,
+            phone:[100,200,300],
+            user:{
+                username:"홍길동",
+                address:"서울"
+            }
+
+        };
+        // MV'VM' - View Model
+        var app = new Vue({
+                el: '#app',
+                data: model
+        });
+
+
+
+# vuejs03 mustache기능
+   <!-- M'V'VM - View-->
+    <div id="app">
+        message : {{ message }} <br>
+        내년age : {{ age + 1 }} <br>
+        40대냐? : {{ age > 40 }} <br>
+        weight : {{ Number.parseInt(weight) + 1 }} <br>
+        height : {{ height }} <br>
+        phone : {{ phone }} &nbsp; {{ phone[0] }} <br>
+        
+        문자열함수_대문자 {{ user.email.toUpperCase() }} <br>
+        문자열함수_소문자 {{ user.email.toLowerCase() }} <br>
+        문자열함수_부분열 {{ user.email.substring(0,3) }} <br>
+        배열함수_join : {{ phone.join("  * ") }} <br>
+
+        3항 연산자 : {{ isMarred ? "기혼" : "미혼"}}
+        
+        
+        
+        
+    </div>
+
+      <script>
+        // 'M'VVM - Model
+        let model = {
+            message : '안녕하세요 vue!',
+            age:30,
+            weight:"67",
+            height:175.34,
+            isMarred : true,
+            phone:[100,200,300],
+            user:{
+                username:"홍길동",
+                address:"서울",
+                email:"AbceD@Naver.com"
+            }
+
+        };
+        // MV'VM' - View Model
+        var app = new Vue({
+                el: '#app',
+                data: model
+        });
+
+
+
+# vuejs04 탬플릿 속성
+    <!-- M'V'VM - View-->
+    <div id="app">
+        {{ message }}
+    </div>
+
+    
+      <script>
+        // 'M'VVM - Model
+        let model = {
+            message : '안녕하세요 vue!',
+            age : 20
+        };
+        // MV'VM' - View Model
+        var app = new Vue({
+                el: '#app',
+                data: model,
+                template: `
+                    <ul>
+                        <li>${model.message}</li>
+                        <li>${model.age}</li>
+                    </ul>
+                `
+        });
+
+
+
+
+
+
+
